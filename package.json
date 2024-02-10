@@ -1,5 +1,10 @@
 {
     "name": "minenohara_dic_v2",
+    "homepage": "https://www.cmscom.jp/app-test",
+    "author": {
+        "name": "Manabu TERADA",
+        "email": "terada@cmscom.jp"
+    },
     "version": "0.1.0",
     "main": "./build/electron/main.js",
     "scripts": {
@@ -13,12 +18,21 @@
       "files": ["build/**/*"],
       "directories": {
         "buildResources": "assets"
-      }
+      },
+      "appId": "jp.cmscom.app",
+      "mac": {
+        "category": "public.app-category.developer-tools"
+    }
     },
     "devDependencies": {
       "@stlite/desktop": "0.39.0",
       "cross-env": "^7.0.3",
       "electron": "^26.2.4",
       "electron-builder": "^24.6.4"
+    },
+    "stlite": {
+        "desktop": {
+            "embed": true
+        }
     }
 }
