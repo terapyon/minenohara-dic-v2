@@ -7,7 +7,7 @@ permissions:
   contents: write
 jobs:
   create-release:
-    name: Create release
+    name: Create Linux release
     runs-on: ubuntu-latest
     steps:
       - name: Chaekout
@@ -32,7 +32,7 @@ jobs:
             dist/minenohara_dic_v2_*.deb
             # dist/minenohara_dic_v2_*.rpm
   create-release-mac:
-    name: Create release
+    name: Create Mac release
     runs-on: macos-latest
     steps:
       - name: Chaekout
