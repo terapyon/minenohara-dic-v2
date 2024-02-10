@@ -16,22 +16,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Build
-        run: |
-          npm i
-          npm run dump minenohara_dic_v2 -- -r requirements.txt
-          npm run dist -- -l deb
-      - name: Release
-        uses: softprops/action-gh-release@v1
+      - name: Build/release Electron app
+        uses: samuelmeuli/action-electron-builder@v1
+        build_script_name:
+          dump minenohara_dic_v2 -- -r requirements.txt
+        args:
+          -l deb
         with:
-          name: ${{ github.event.pull_request.body }}
-          tag_name: ${{ github.event.pull_request.title }}
-          token: ${{ github.token }}
-          generate_release_notes: true
-          files: |
-            # dist/minenohara_dic_v2 Setup *.exe
-            dist/minenohara_dic_v2_*.deb
-            # dist/minenohara_dic_v2_*.rpm
+          release: ${{ startsWith(github.ref, 'refs/tags/v') }}
   create-release-mac:
     name: Create Mac release
     runs-on: macos-latest
@@ -42,13 +34,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Build
-        run: |
-          npm i
-          npm run dump minenohara_dic_v2 -- -r requirements.txt
-          npm run dist -- -m
       - name: Release
         uses: softprops/action-gh-release@v1
+        build_script_name:
+          dump minenohara_dic_v2 -- -r requirements.txt
+        args:
+          -m
         with:
           name: ${{ github.event.pull_request.body }}
           tag_name: ${{ github.event.pull_request.title }}
