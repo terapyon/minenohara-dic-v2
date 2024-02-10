@@ -26,6 +26,7 @@ jobs:
         with:
           name: ${{ github.event.pull_request.body }}
           tag_name: ${{ github.event.pull_request.title }}
+          token: ${{ github.token }}
           generate_release_notes: true
           files: |
             # dist/minenohara_dic_v2 Setup *.exe
@@ -51,6 +52,7 @@ jobs:
         with:
           name: ${{ github.event.pull_request.body }}
           tag_name: ${{ github.event.pull_request.title }}
+          token: ${{ github.token }}
           generate_release_notes: true
           files: |
             dist/minenohara_dic_v2-*.dmg
