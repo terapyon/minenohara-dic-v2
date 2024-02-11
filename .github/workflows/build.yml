@@ -22,14 +22,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          github_token: ${{ secrets.github_token }}
       - name: Run build
         run: |
-          npm install
-          npm run dump minenohara_dic_v2 -- -r requirements.txt
+          yarn install
+          yarn dump minenohara_dic_v2 -r requirements.txt
       - name: Run dist
         run: |
-          npm run dist -- -l deb
+          yarn dist -- -l deb
 
       - name: Release
         uses: softprops/action-gh-release@v1
