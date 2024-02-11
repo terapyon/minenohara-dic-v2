@@ -17,10 +17,12 @@ jobs:
     steps:
       - name: Chaekout
         uses: actions/checkout@v3
+
       - name: Use Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          github_token: ${{ secrets.github_token }}
       - name: Run build
         run: |
           npm install
@@ -28,8 +30,7 @@ jobs:
       - name: Run dist
         run: |
           npm run dist -- -l deb
-        with:
-          github_token: ${{ secrets.github_token }}
+
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
