@@ -31,16 +31,16 @@ jobs:
 
       - name: Run dist on Linux
         if: startsWith(matrix.os,'ubuntu')
-          run: |
-            yarn dist -l deb rpm
+        run: |
+          yarn dist -l deb rpm
       - name: Run dist on Windows
         if: startsWith(matrix.os,'windows')
-          run: |
-            yarn dist -w
+        run: |
+          yarn dist -w
       - name: Run dist on macOS
         if: startsWith(matrix.os,'macos')
-          run: |
-            yarn dist -m
+        run: |
+          yarn dist -m
 
       - name: Release
         uses: softprops/action-gh-release@v1
