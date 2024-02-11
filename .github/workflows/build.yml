@@ -18,6 +18,7 @@ jobs:
           node-version: 20
       - name: Run build
         run: |
+          npm install
           npm run dump minenohara_dic_v2 -- -r requirements.txt
       - name: Build/release Electron app
         uses: samuelmeuli/action-electron-builder@v1
