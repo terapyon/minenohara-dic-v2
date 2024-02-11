@@ -5,14 +5,16 @@ on:
       - v*.*.*
 permissions:
   contents: write
+env:
+  GH_TOKEN: ${{ github.token }}
+
 jobs:
   create-release:
     name: Create release
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        # os: [macos-latest, ubuntu-latest, windows-latest]
-        os: [ubuntu-latest]
+        os: [macos-latest, ubuntu-latest, windows-latest]
 
     steps:
       - name: Chaekout
@@ -26,11 +28,19 @@ jobs:
         run: |
           yarn install
           yarn dump minenohara_dic_v2 -r requirements.txt
-      - name: Run dist
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          yarn dist -l deb
+
+      - name: Run dist on Linux
+        if: startsWith(matrix.os,'ubuntu')
+          run: |
+            yarn dist -l deb rpm
+      - name: Run dist on Windows
+        if: startsWith(matrix.os,'windows')
+          run: |
+            yarn dist -w
+      - name: Run dist on macOS
+        if: startsWith(matrix.os,'macos')
+          run: |
+            yarn dist -m
 
       - name: Release
         uses: softprops/action-gh-release@v1
@@ -39,6 +49,6 @@ jobs:
           tag_name: ${{ github.event.pull_request.title }}
           generate_release_notes: true
           files: |
-            # dist/minenohara_dic_v2 Setup *.exe
-            dist/minenohara_dic_v2_*.deb
+            dist/minenohara_dic_v2*
+            # dist/minenohara_dic_v2_*.deb
             # dist/minenohara_dic_v2_*.rpm
