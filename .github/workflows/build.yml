@@ -67,7 +67,7 @@ jobs:
   upload-release:
     name: 'Upload Release'
     runs-on: ubuntu-latest
-    needs: [build-base, build-head]
+    needs: [create-release]
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v4
