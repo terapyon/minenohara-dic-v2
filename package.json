@@ -5,7 +5,7 @@
         "name": "Manabu TERADA",
         "email": "terada@cmscom.jp"
     },
-    "version": "0.2.7",
+    "version": "0.2.9",
     "main": "./build/electron/main.js",
     "scripts": {
       "dump": "dump-stlite-desktop-artifacts",
